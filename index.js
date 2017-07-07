@@ -2,6 +2,7 @@ const express= require('express')
 const session=require('express-session')
 const passport=require('passport');
 const Auth0Strategy=require('passport-auth0');
+const config = require('./config');
 
 let app=express();
 //session
@@ -22,8 +23,14 @@ passport.use(new Auth0Strategy({
   callbackURL: 'http://localhost:3000/auth/callback'
 }, function(accessToken, refreshToken, extraParams, profile, done) {
     console.log(profile);
+    //do dtabas stuff here
+//us profile.id to find user
+// if user=> done
+//else create user
+//=>done
   return done(null, profile);
 }));
+
 
 app.get('/auth', passport.authenticate('auth0'));
 
